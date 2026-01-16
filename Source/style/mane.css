@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Bitcount Prop Single', serif;
+    font-size: 1.5em;
+}
+
+
+
+                                                      /* Header NavBar */
+.navbar-brand {
+    color: black;
+}
+
+.container-fluid {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+}
+
+.collapse>ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 0.562);
+    padding: 20px;
+
+}
+
+.nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.nav-link-active {
+    color: black;
+
+}
+
+/* Кнопка выпадающего списка */
+.dropbtn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 0px;
+    font-size: 1em;
+    border: none;
+}
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.dropdown {
+    position: relative;
+    display: inline-flex;
+    justify-content: flex-end;
+
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Ссылки внутри выпадающего списка */
+.dropdown-content a {
+    color: black;
+    margin: 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+}
+
+/* Изменение цвета выпадающих ссылок при наведении курсора */
+.dropdown-content a:hover {
+    background-color: aquamarine;
+}
+
+
+/* Показать выпадающее меню при наведении курсора */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Настройка медии для телефонов */
+
+@media (min-width: 755px) {
+    .dropdown {
+        display: none;
+    }
+
+
+    .form-control {
+        width: 170px;
+    }
+
+
+}
+
+@media (max-width: 755px) {
+    .collapse {
+        display: none;
+    }
+
+    .form-control {
+        width: 100px;
+    }
+}
+
+
+
+
+                                                      /* Section */
+.nav-linkS:hover {
+    color: black;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+.collapse-section>ul {
+    display: flex;
+    list-style: none;
+
+}
+
+.container-text-center {
+    display: flex;
+    justify-content: center;
+}
+
+.cols-4 {
+
+    display: grid;
+    grid-template-columns: repeat(4, 330px);
+    justify-content: center;
+    grid-auto-rows: minmax(750px, auto);
+}
+
+.col {
+    padding-left: 90px;
+}
+
+.card-text {
+    display: grid;
+    grid-template-rows: minmax(260px, auto);
+    grid-template-columns: 300px  
+}
+
+.card {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.btn-btn-primary {
+    border: 2px;
+    border-style: dashed;
+    background-color: rgb(255, 1, 1);
+    color: rgb(0, 0, 0);
+    padding: 5px;
+
+}
+
+.nav-linkS {
+    color: rgba(0, 0, 0, 0.562);
+    padding: 20px;
+
+}
+
+.nav-itemS {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card-body>p {
+    padding-bottom: 5px;
+}
+
+.navbar-nav-sectional {
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
+        padding-right: 60px;
+        padding-top: 60px;
+    }
+
+.down-section-text {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    padding-left: 105px;
+    grid-column-gap: 20px;
+    grid-template-rows: minmax(50px,auto);
+}
+
+.down-section-text>div>p {
+    padding: 8px;
+}
+
+.hdown-sec {
+        display: flex;
+        justify-content: center;
+}
+
+
+
+
+
+
+
+    @media (max-width: 1710px) {
+    .cols-4 {
+        grid-template-columns: 300px 300px 300px 300px
+    }
+
+    .navbar-brand-section {
+        display: none;
+    }
+
+    .navbar-nav-sectional {
+        padding-left: 250px;
+    }
+}
+
+@media (max-width: 1430px) {
+    .cols-4 {
+        grid-template-columns: 500px 500px
+    }
+
+    .navbar-nav-sectional {
+        display: flex;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
+    }
+
+    .nav-linkS {
+        font-size: 0.6em;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .down-section-text {
+        font-size: 0.6em;
+        padding-left: 5px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .cols-4 {
+        grid-template-columns: 800px
+    }
+
+    .nav-linkS {
+        font-size: 0.4em;
+    }
+    .navbar-nav-sectional {
+        padding-left: 0px;
+    }
+    .hdown-sec {
+        display: block;
+        padding-left: 12px;
+    }
+    .down-section-text {
+        grid-template-columns: 500px;
+}
+}
+
+                                                /* Footer */
+        
+footer {
+    background-color: rgb(27, 27, 27);
+    color:#ffffff
+}
+
+.footergrid {
+    display: grid; 
+    grid-template-columns: repeat(5, 300px);
+    grid-template-rows: minmax(100px,auto);
+    padding-left: 135px;
+    padding-bottom: 50px;
+}
+
+.footergrid>div>p {
+    padding: 5px;
+}
+.footergrid>div>p>a {
+    color: aquamarine;
+}
+.footergrid>div>p>a:hover {
+    color:rgb(0, 133, 88);
+}
+.dowland-silka>a>img {
+    width: 170px;
+    height: 50px;
+    padding: 3px;
+    padding-top: 5px;
+}
+#silka1 {
+    padding-left: 40px;
+}
+
+@media (max-width: 1530px) {
+    .footergrid {
+        grid-template-columns: repeat(3,300px);
+    }
+    .dowland-silka>a>img {
+        padding-left: 150px;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 1040px) {
+    .footergrid {
+        grid-template-columns: repeat(2,200px);
+        padding-left: 28px;
+    }
+    #silka1 {
+    padding-left: 0px;
+    }
+    #silka2 {
+    padding-left: 200px;
+    }
+}

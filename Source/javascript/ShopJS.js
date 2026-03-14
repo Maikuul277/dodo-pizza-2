@@ -1,4 +1,4 @@
-// DOM element
+//DOM element
 const cartCount = document.querySelector(".cart-count")
 const buttons = document.querySelectorAll(".add-to-cart")
 const cartIcon = document.querySelector(".cart")
@@ -7,7 +7,7 @@ const closeCart = document.getElementById("closeCart")
 const cartItems = document.getElementById("cartItems")
 
 
-// Массив карточек корзины
+//Массив карточек корзины
 let cart = []
 
 
@@ -94,7 +94,7 @@ function updateCartCount() {
 updateCartCount()
 
 
-// POPup корзина и ее открытие
+//POPup корзина и ее открытие
 cartIcon.addEventListener("click", () => {
 
     if(cartIcon){

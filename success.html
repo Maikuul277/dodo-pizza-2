@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спасибо за заказ!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .success-icon {
+            background: #28a745;
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .order-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .order-info p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .order-number {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="success-card">
+    <div class="success-icon">✓</div>
+    <h1>Спасибо за покупку!</h1>
+    <p>Ваш заказ успешно оформлен и принят в обработку.</p>
+
+    <div class="order-info">
+        <p><strong>Номер заказа:</strong> <span class="order-number" id="orderNumber"></span></p>
+        <p><strong>Дата:</strong> <span id="orderDate"></span></p>
+        <p><strong>Сумма:</strong> <span id="orderAmount">0</span> $</p>
+        <p>Подтверждение отправлено на вашу электронную почту.</p>
+    </div>
+
+    <div class="buttons">
+        <a href="index.html" class="btn btn-primary">Вернуться в каталог</a>
+<!--        <a href="checkout.html" class="btn btn-secondary">Посмотреть заказы</a> &lt;!&ndash; Можно заменить на страницу истории заказов, если есть &ndash;&gt;-->
+    </div>
+
+    <div class="footer-note">
+        Если у вас возникли вопросы, свяжитесь с нашей службой поддержки.
+    </div>
+</div>
+
+<script>
+    // Генерируем случайный номер заказа (например, вида #2025-ABCD)
+    function generateOrderNumber() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let result = '#';
+        for (let i = 0; i < 8; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    // Получаем сумму из localStorage (если сохраняли последний заказ) или из URL
+    function getLastOrderAmount() {
+        // Можно взять из localStorage, если мы сохраняли при оплате, но у нас не сохранялось.
+        // Либо просто покажем заглушку, либо попытаемся извлечь из URL параметра.
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        return amount ? amount : '—';
+    }
+
+    // Устанавливаем данные на страницу
+    document.getElementById('orderNumber').textContent = generateOrderNumber();
+
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    document.getElementById('orderDate').textContent = formattedDate;
+
+    // Попытаемся получить сумму из URL (если мы передали при редиректе)
+    const amount = getLastOrderAmount();
+    document.getElementById('orderAmount').textContent = amount;
+
+    // Можно также очистить корзину ещё раз на всякий случай, но она уже должна быть пустой после оплаты.
+    // Если хотите, можно добавить:
+    // localStorage.removeItem('myCart');
+</script>
+</body>
+</html>

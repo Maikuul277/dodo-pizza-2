@@ -1,3 +1,4 @@
+import { saveCart } from './storage.js';
 // Приватное состояние корзины
 let cart = [];
 
@@ -13,10 +14,12 @@ export function addToCart(name, price) {
         const numericPrice = Number(price); // или parseFloat(price)
         cart.push({ name, price: numericPrice, quantity: 1 });
     }
+    saveCart(cart);
 }
 
 export function increase(index) {
     cart[index].quantity++;
+    saveCart(cart);
 }
 
 export function decrease(index) {
@@ -24,10 +27,12 @@ export function decrease(index) {
     if (cart[index].quantity <= 0) {
         cart.splice(index, 1);
     }
+    saveCart(cart);
 }
 
 export function removeItem(index) {
     cart.splice(index, 1);
+    saveCart(cart);
 }
 
 // Функция для получения копии корзины (чтобы внешний код не мог изменить её напрямую)
@@ -38,6 +43,7 @@ export function getCart() {
 // Функция для полной замены корзины (например, при загрузке из localStorage)
 export function setCart(newCart) {
     cart = [...newCart];
+    saveCart(cart);
 }
 
 // Дополнительно: общая сумма и количество товаров

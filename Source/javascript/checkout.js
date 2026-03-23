@@ -1,4 +1,8 @@
 // checkout.js – модуль для страницы оплаты
+// noinspection ExceptionCaughtLocallyJS
+// noinspection ExceptionCaughtLocallyJS
+
+import { saveOrder, generateOrderId } from './orderStorage.js';
 import { getCart, getTotal, setCart } from './cart.js';
 import { saveCart,loadCart } from './storage.js';
 
@@ -20,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardNumberError = document.getElementById('card-number-error');
     const expiryError = document.getElementById('expiry-error');
     const cvvError = document.getElementById('cvv-error');
+    const spinner = document.getElementById('spinner');
 
     // --- Получаем данные корзины через функцию getCart() ---
     let cart = getCart(); // получаем копию массива товаров
@@ -34,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Отображаем товары и общую сумму ---
     renderCartItems(cart);
-    totalSpan.textContent = getTotal(); // используем готовую функцию подсчёта
+    totalSpan.textContent = getTotal();
+    console.log('totalSpan элемент:', totalSpan);// используем готовую функцию подсчёта
 
     function renderCartItems(cart) {
         let html = '';
@@ -146,8 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Блокируем кнопку и показываем спиннер
         payButton.disabled = true;
-        payButton.textContent = 'Обработка...';
+        spinner.style.display = 'inline-block';
+        payButton.textContent = 'Оплата...'; // опционально меняем текст
+
 
         const paymentData = {
             cardNumber: cardNumberInput.value.replace(/\s/g, ''),
@@ -161,10 +170,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fakePaymentRequest(paymentData);
 
             if (!response.success) {
-                // throw new Error(response.error || 'Ошибка оплаты');
+                throw new Error(response.error || 'Ошибка оплаты');
             } else {
                 paymentStatus.textContent = 'Оплата прошла успешно! Спасибо за покупку.';
                 paymentStatus.className = 'success';
+
+                if (response.success) {
+
+                    // Создаём объект заказа
+                    const order = {
+                        id: generateOrderId(),
+                        date: new Date().toISOString(),
+                        amount: totalSpan.textContent,
+                        items: cart // копия товаров
+                    };
+                    saveOrder(order);
+                }
 
                 // Очищаем корзину в состоянии и в localStorage
                 setCart([]);          // очищаем внутренний массив cart.js
@@ -177,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             paymentStatus.textContent = 'Ошибка: ' + error.message;
-            paymentStatus.className = 'error-message';
+            spinner.style.display = 'none';
             payButton.disabled = false;
             payButton.textContent = 'Оплатить';
         }

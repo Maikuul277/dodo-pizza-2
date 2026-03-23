@@ -59,8 +59,10 @@
                   <small class="error" id="cvv-error"></small>
                </div>
             </div>
-
-            <button type="submit" id="pay-button">Оплатить</button>
+            <div class="payment-submit">
+               <button type="submit" id="pay-button">Оплатить</button>
+               <div class="spinner" id="spinner" style="display: none;"></div>
+            </div>
             <div id="payment-status"></div> <!-- Для сообщений об успехе/ошибке -->
          </form>
       </section>
